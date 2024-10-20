@@ -4,15 +4,19 @@ import Car from '../models/Car.js';
 const router = express.Router();
 
 // Create a new car
+// cars.js
 router.post('/', async (req, res) => {
+    console.log('Received POST request with body:', req.body); // Log the request body
     try {
         const car = new Car(req.body);
         await car.save();
         res.status(201).send(car);
     } catch (error) {
+        console.error('Error saving car:', error); // Log errors
         res.status(400).send(error);
     }
 });
+
 
 // Get all cars
 router.get('/', async (req, res) => {
